@@ -42,8 +42,21 @@ async function getAirplane(id) {
     }
 }
 
+async function updateAirplane(data, id) {
+    try {
+        const airplane = await airplaneRepository.update(id, data);
+        return airplane;
+    } catch (error) {
+        if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('The requested airplane with this id is not found', error.statusCode);
+        }
+        throw new AppError('Cannot update the requested airplane', StatusCodes.INTERNAL_SERVER_ERROR);   
+    }
+}
+
 module.exports = {
     createAirplane,
     getAirplanes,
-    getAirplane
+    getAirplane,
+    updateAirplane
 }

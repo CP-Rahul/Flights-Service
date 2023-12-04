@@ -26,11 +26,14 @@ class CrudRepository{
     }
 
     async update(id, data) {
-        const response = await this.create.model.update(data,{
+        const response = await this.model.update(data,{
             where: {
                 id: id
             }
         })
+        if(response == 0) {
+            throw new AppError('The requested data is not exixts', StatusCodes.NOT_FOUND);
+        }
         return response;
     }
 
