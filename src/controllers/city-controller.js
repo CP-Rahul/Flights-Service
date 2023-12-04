@@ -50,9 +50,25 @@ async function getCity(req, res) {
     }
 }
 
+async function updateCity(req, res) {
+    try {
+        const city = await CityService.getCity(req.params.id,{
+            name: req.body.name
+        });
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse)
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse)
+    }
+}
 
 module.exports = {
     createCity,
     getCities,
-    getCity
+    getCity,
+    updateCity
 }

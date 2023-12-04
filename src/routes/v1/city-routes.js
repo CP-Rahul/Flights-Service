@@ -18,6 +18,11 @@ router.get('/:id',
         CityController.getCity
 );
 
+router.patch('/:id',
+        CityMiddlewares.validateUpdateRequest,
+        CityController.updateCity
+);
+
 
 
 module.exports = router;

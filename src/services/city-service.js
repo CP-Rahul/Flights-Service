@@ -38,14 +38,29 @@ async function getCity(id) {
         return city;
     } catch (error) {
         if(error.statusCode == StatusCodes.NOT_FOUND) {
-            throw new AppError('The requested city is not found', StatusCodes.NOT_FOUND);
+            throw new AppError('The requested city is not found', error.statusCode);
         }
         throw new AppError('Cannot fetch data of requested city', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
+async function updateCity(id, data) {
+    try {
+        const city = await cityRepository.update(id, data);
+        console.log(city);
+        return city;
+    } catch (error) {
+        if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('The requested city for update is not found', error.statusCode);
+        }
+        console.log(error)
+        throw new AppError('Cannot update requested city', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
 module.exports = {
     createCity,
     getCities,
-    getCity
+    getCity,
+    updateCity
 }
