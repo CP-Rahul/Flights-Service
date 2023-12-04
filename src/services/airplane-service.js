@@ -48,9 +48,21 @@ async function updateAirplane(data, id) {
         return airplane;
     } catch (error) {
         if(error.statusCode == StatusCodes.NOT_FOUND) {
-            throw new AppError('The requested airplane with this id is not found', error.statusCode);
+            throw new AppError('The requested airplane with this id is not found for update', error.statusCode);
         }
         throw new AppError('Cannot update the requested airplane', StatusCodes.INTERNAL_SERVER_ERROR);   
+    }
+}
+
+async function destroyAirplane(data) {
+    try {
+        const airplane = await airplaneRepository.destroy(data);
+        return airplane;
+    } catch (error) {
+        if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('The requested airplane with this is is not found for delete', error.statusCode);
+        }
+        throw new AppError('Cannot delete the requested airplane', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -58,5 +70,6 @@ module.exports = {
     createAirplane,
     getAirplanes,
     getAirplane,
-    updateAirplane
+    updateAirplane,
+    destroyAirplane
 }

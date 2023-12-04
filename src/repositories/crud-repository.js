@@ -32,7 +32,7 @@ class CrudRepository{
             }
         })
         if(response == 0) {
-            throw new AppError('The requested data is not exixts', StatusCodes.NOT_FOUND);
+            throw new AppError('Not able to find the requested resource', StatusCodes.NOT_FOUND);
         }
         return response;
     }
@@ -43,6 +43,9 @@ class CrudRepository{
                 id: data
             }
         })
+        if(!response) {
+            throw new AppError('Not able to find the requested resource', StatusCodes.NOT_FOUND)
+        }
         return response
     }
 }
