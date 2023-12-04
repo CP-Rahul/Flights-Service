@@ -18,6 +18,7 @@ router.get('/:id',
 )
 
 router.patch('/:id',
+        AirplaneMiddlewares.validateUpdateRequest,        
         AirplaneController.updateAirplane
 )
         
