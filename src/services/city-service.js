@@ -23,6 +23,16 @@ async function createCity(data) {
     }
 }
 
+async function getCities() {
+    try {
+        const city = await cityRepository.getAll();
+        return city;
+    } catch (error) {
+        throw new AppError('Canot fetch data of all cities', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
 module.exports = {
-    createCity
+    createCity,
+    getCities
 }

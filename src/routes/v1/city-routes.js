@@ -10,4 +10,9 @@ router.post('/',
         CityController.createCity
 );
 
+router.get('/',
+        CityController.getCities
+);
+
+
 module.exports = router;
