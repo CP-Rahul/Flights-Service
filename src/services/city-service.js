@@ -44,16 +44,14 @@ async function getCity(id) {
     }
 }
 
-async function updateCity(id, data) {
+async function updateCity(data, id) {
     try {
         const city = await cityRepository.update(id, data);
-        console.log(city);
         return city;
     } catch (error) {
         if(error.statusCode == StatusCodes.NOT_FOUND) {
             throw new AppError('The requested city for update is not found', error.statusCode);
         }
-        console.log(error)
         throw new AppError('Cannot update requested city', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }

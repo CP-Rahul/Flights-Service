@@ -52,9 +52,10 @@ async function getCity(req, res) {
 
 async function updateCity(req, res) {
     try {
-        const city = await CityService.getCity(req.params.id,{
+        const city = await CityService.updateCity({
             name: req.body.name
-        });
+        }, req.params.id,);
+        SuccessResponse.data = city;
         return res
                 .status(StatusCodes.OK)
                 .json(SuccessResponse)
