@@ -10,4 +10,7 @@ router.post('/',
         FlightMiddlewares.validateTime,
         FlightController.createFlight);
 
+router.get('/',
+        FlightController.getFlights);
+
 module.exports = router;
