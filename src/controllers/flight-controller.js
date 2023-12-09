@@ -36,7 +36,7 @@ async function getFlights(req, res) {
                 .status(StatusCodes.OK)
                 .json(SuccessResponse);
     } catch (error) {
-        ErrorResponse.data = flights;
+        ErrorResponse.data = error;
         return res
                 .status(error.statusCode)
                 .json(ErrorResponse);
